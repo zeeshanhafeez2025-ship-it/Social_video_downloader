@@ -1,1 +1,826 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VideoSaveHub - Fast Media Downloader</title>
+
+<meta name="description"
+content="VideoSaveHub is a simple, fast and mobile-friendly media downloader for permitted direct media files.">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f6f8fc;
+    color:#151827;
+    line-height:1.6;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#ffffff;
+    border-bottom:1px solid #e8eaf0;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.nav-inner{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:-.5px;
+}
+
+.logo span{
+    color:#5b5ce2;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    color:#666d7e;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:#5b5ce2;
+}
+
+/* HERO */
+
+.hero{
+    padding:75px 0 50px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:50px;
+    background:#e9e9ff;
+    color:#5051d8;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:850px;
+    margin:auto;
+    font-size:clamp(40px,7vw,72px);
+    line-height:1.04;
+    letter-spacing:-2px;
+}
+
+.hero h1 span{
+    color:#5b5ce2;
+}
+
+.hero-text{
+    max-width:650px;
+    margin:20px auto 0;
+    color:#6d7485;
+    font-size:17px;
+}
+
+/* DOWNLOADER */
+
+.downloader{
+    width:min(850px,100%);
+    margin:35px auto 0;
+    background:#fff;
+    padding:10px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(30,35,80,.12);
+    display:flex;
+    gap:10px;
+}
+
+.url-input{
+    flex:1;
+    border:1px solid #e6e8ef;
+    outline:none;
+    padding:17px;
+    border-radius:13px;
+    font-size:16px;
+    background:#f8f9fc;
+}
+
+.url-input:focus{
+    border-color:#5b5ce2;
+}
+
+.download-btn{
+    border:0;
+    padding:0 27px;
+    border-radius:13px;
+    background:#5b5ce2;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.download-btn:hover{
+    opacity:.9;
+}
+
+.message{
+    min-height:28px;
+    margin-top:15px;
+    font-size:14px;
+    color:#62697a;
+}
+
+/* TRUST */
+
+.trust{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:25px;
+    color:#777e8d;
+    font-size:13px;
+}
+
+/* FEATURES */
+
+.section{
+    padding:65px 0;
+}
+
+.section-title{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:35px;
+    letter-spacing:-.5px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #e8eaf0;
+    border-radius:18px;
+    padding:30px;
+}
+
+.card-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:#ededff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:18px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#737a89;
+    font-size:14px;
+}
+
+/* HOW TO */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.step{
+    background:#fff;
+    border:1px solid #e8eaf0;
+    border-radius:18px;
+    padding:28px;
+}
+
+.step-number{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#5b5ce2;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.step p{
+    color:#737a89;
+    font-size:14px;
+}
+
+/* FAQ */
+
+.faq{
+    max-width:800px;
+    margin:auto;
+}
+
+details{
+    background:#fff;
+    border:1px solid #e6e8ef;
+    border-radius:14px;
+    margin-bottom:12px;
+    padding:18px 20px;
+}
+
+summary{
+    cursor:pointer;
+    font-weight:700;
+}
+
+details p{
+    margin-top:12px;
+    color:#6e7585;
+    font-size:14px;
+}
+
+/* NOTICE */
+
+.notice{
+    max-width:900px;
+    margin:auto;
+    background:#fff8e7;
+    border:1px solid #efdfad;
+    border-radius:16px;
+    padding:22px;
+    color:#62542b;
+    font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#171a2b;
+    color:#b9becd;
+    margin-top:40px;
+    padding:45px 0;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.footer-logo{
+    color:#fff;
+    font-size:22px;
+    font-weight:800;
+}
+
+.footer-logo span{
+    color:#7c7df0;
+}
+
+.footer-links{
+    display:flex;
+    gap:20px;
+    font-size:14px;
+}
+
+.copyright{
+    border-top:1px solid #303345;
+    margin-top:30px;
+    padding-top:20px;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding-top:50px;
+    }
+
+    .hero h1{
+        letter-spacing:-1px;
+    }
+
+    .downloader{
+        flex-direction:column;
+    }
+
+    .download-btn{
+        height:54px;
+    }
+
+    .cards,
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:45px 0;
+    }
+}
+
+@media(max-width:450px){
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .hero-text{
+        font-size:15px;
+    }
+
+    .trust{
+        gap:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header class="navbar">
+
+<div class="container nav-inner">
+
+<a href="#" class="logo">
+Video<span>SaveHub</span>
+</a>
+
+<nav class="nav-links">
+<a href="#features">Features</a>
+<a href="#how">How It Works</a>
+<a href="#faq">FAQ</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<main>
+
+<section class="hero">
+
+<div class="container">
+
+<div class="badge">
+⚡ FAST • SIMPLE • NO SIGN UP
+</div>
+
+<h1>
+Download Media
+<span>Simply.</span>
+</h1>
+
+<p class="hero-text">
+Paste a direct media-file URL and access your permitted media quickly.
+No account or registration is required.
+</p>
+
+
+<!-- DOWNLOAD BOX -->
+
+<div class="downloader">
+
+<input
+id="urlInput"
+class="url-input"
+type="url"
+placeholder="Paste direct media URL here..."
+aria-label="Media URL"
+autocomplete="off"
+>
+
+<button
+class="download-btn"
+onclick="downloadMedia()">
+Download
+</button>
+
+</div>
+
+<div
+id="message"
+class="message"
+aria-live="polite">
+</div>
+
+
+<div class="trust">
+
+<span>✓ No Registration</span>
+<span>✓ Mobile Friendly</span>
+<span>✓ Simple Interface</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+<div class="container">
+
+<h2 class="section-title">
+Why Use VideoSaveHub?
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<div class="card-icon">⚡</div>
+
+<h3>Fast Experience</h3>
+
+<p>
+A lightweight interface designed to get you from URL to media quickly.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">🔓</div>
+
+<h3>No Sign Up</h3>
+
+<p>
+Use the website without creating an account or providing personal details.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">📱</div>
+
+<h3>Works on Mobile</h3>
+
+<p>
+The responsive layout is designed for phones, tablets and desktop devices.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HOW TO -->
+
+<section class="section" id="how">
+
+<div class="container">
+
+<h2 class="section-title">
+How To Use
+</h2>
+
+<div class="steps">
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<h3>Copy Your URL</h3>
+
+<p>
+Copy the direct URL of a media file that you own or have permission to download.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<h3>Paste It</h3>
+
+<p>
+Paste the URL into the downloader box on this page.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<h3>Download</h3>
+
+<p>
+Press Download. Your browser will open the permitted media URL.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTICE -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="notice">
+
+<strong>Important:</strong><br><br>
+
+VideoSaveHub is intended for media that you own, have permission
+to download, or that is explicitly offered for downloading.
+Do not use the service to bypass access controls, copyright
+protections, or platform restrictions.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="section" id="faq">
+
+<div class="container">
+
+<h2 class="section-title">
+Frequently Asked Questions
+</h2>
+
+<div class="faq">
+
+<details>
+
+<summary>
+Do I need an account?
+</summary>
+
+<p>
+No. The website interface does not require registration.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Can I use it on my phone?
+</summary>
+
+<p>
+Yes. The website is responsive and designed for mobile screens.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+What type of URL should I use?
+</summary>
+
+<p>
+Use a direct HTTP or HTTPS media-file URL that you are legally
+allowed to access and download.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Does it download every social-media link?
+</summary>
+
+<p>
+No. A simple browser-based page cannot reliably extract media
+from every social platform. Platform restrictions and technical
+requirements vary.
+</p>
+
+</details>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-inner">
+
+<div>
+
+<div class="footer-logo">
+Video<span>SaveHub</span>
+</div>
+
+<p>
+Simple media downloading for permitted files.
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<a href="#features">Features</a>
+<a href="#how">How It Works</a>
+<a href="#faq">FAQ</a>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+
+© 2026 VideoSaveHub. All rights reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+function downloadMedia(){
+
+    const input =
+        document.getElementById("urlInput");
+
+    const message =
+        document.getElementById("message");
+
+    const url =
+        input.value.trim();
+
+
+    if(!url){
+
+        message.textContent =
+            "Please paste a URL first.";
+
+        return;
+    }
+
+
+    let parsedURL;
+
+    try{
+
+        parsedURL =
+            new URL(url);
+
+    }catch(error){
+
+        message.textContent =
+            "Please enter a valid URL.";
+
+        return;
+    }
+
+
+    if(
+        parsedURL.protocol !== "https:" &&
+        parsedURL.protocol !== "http:"
+    ){
+
+        message.textContent =
+            "Only HTTP and HTTPS URLs are supported.";
+
+        return;
+    }
+
+
+    message.textContent =
+        "Opening your media URL...";
+
+
+    const link =
+        document.createElement("a");
+
+    link.href =
+        parsedURL.href;
+
+    link.target =
+        "_blank";
+
+    link.rel =
+        "noopener noreferrer";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+
+    setTimeout(function(){
+
+        message.textContent =
+            "If the file does not download automatically, use your browser's Save/Download option.";
+
+    },1000);
+
+}
+
+
+document
+.getElementById("urlInput")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+
+        downloadMedia();
+
+    }
+
+});
+
+</script>
+
+</body>
+  </html>
